@@ -16,21 +16,22 @@ class AddNotesForm extends StatefulWidget {
 
 class _AddNotesFormState extends State<AddNotesForm> {
   final GlobalKey<FormState> formKey = GlobalKey();
-  AutovalidateMode autoValidateMode =AutovalidateMode.disabled;
-  String? title,subTitle;
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+   String? title, subTitle;
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       autovalidateMode: autoValidateMode,
       child: Column(
-        children:  [
+        children: [
           const SizedBox(
             height: 32,
           ),
           CustomTextFeild(
-            onSaved: (value){
-              title= value;
+            onSaved: (value) {
+              title = value;
             },
             hint: 'title',
           ),
@@ -38,24 +39,29 @@ class _AddNotesFormState extends State<AddNotesForm> {
             height: 16,
           ),
           CustomTextFeild(
-            onSaved: (value){
-              subTitle= value;
+            onSaved: (value) {
+              subTitle = value;
             },
             hint: 'content',
             maxLine: 8,
           ),
-          const SizedBox(height: 32,),
+          const SizedBox(
+            height: 32,
+          ),
           CustomButton(
-            onTap: (){
-              if(formKey.currentState!.validate()){
-                var noteModel = NoteModel(title: title!, subTitle: subTitle!, date: DateTime.now().toString(), color: Colors.blue.value);
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                var noteModel = NoteModel(
+                    title: title!,
+                    subTitle: subTitle!,
+                    date: DateTime.now().toString(),
+                    color: Colors.blue.value);
                 BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-;                formKey.currentState!.save();
-              }else{
-                autoValidateMode = AutovalidateMode.always;
-                setState(() {
 
-                });
+              } else {
+                autoValidateMode = AutovalidateMode.always;
+                setState(() {});
               }
             },
           ),
@@ -67,4 +73,3 @@ class _AddNotesFormState extends State<AddNotesForm> {
     );
   }
 }
-
