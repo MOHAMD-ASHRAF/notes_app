@@ -1,6 +1,6 @@
 # note_app
 
-#### screens of application 
+#### 📔 screens of application 
 Developed a simple and easy-to-use way app to take, organize, and share notes. It is perfect for students, professionals, and
 anyone who needs to keep track of their thoughts and ideas.
 ###
